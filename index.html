@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mustafa Abduljabbar - Portfolio</title>
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f8f9fa;
+      --bg-card: #ffffff;
+
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --text-tertiary: #64748b;
+
+      --border-color: #e5e7eb;
+      --shadow: rgba(2, 6, 23, 0.08);
+
+      --lean: #38bdf8;
+      --circular: #dc2626;
+      --digital: #16a34a;
+      --erp: #2563eb;
+      --logprov: #0ea5e9;
+      --ops: #7c3aed;
+
+      --radius: 14px;
+    }
+
+    [data-theme="dark"] {
+      --bg-primary: #0b1220;
+      --bg-secondary: #0f172a;
+      --bg-card: #111b2e;
+
+      --text-primary: #f1f5f9;
+      --text-secondary: #cbd5e1;
+      --text-tertiary: #94a3b8;
+
+      --border-color: #22314b;
+      --shadow: rgba(0, 0, 0, 0.35);
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+      line-height: 1.6;
+      color: var(--text-primary);
+      background: var(--bg-primary);
+      transition: background-color 0.25s ease, color 0.25s ease;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    .theme-toggle {
+      position: fixed;
+      top: 22px;
+      right: 22px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 999px;
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+      z-index: 1000;
+      box-shadow: 0 10px 26px var(--shadow);
+    }
+
+    .theme-toggle:hover {
+      transform: translateY(-1px);
+      border-color: rgba(37, 99, 235, 0.3);
+      box-shadow: 0 14px 34px var(--shadow);
+    }
+
+    .theme-toggle svg { width: 20px; height: 20px; fill: var(--text-primary); opacity: 0.92; }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 80px 24px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 70px;
+      padding-bottom: 55px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .name {
+      font-size: clamp(2.2rem, 4.8vw, 3.5rem);
+      font-weight: 900;
+      letter-spacing: -1.2px;
+      margin-bottom: 14px;
+      background: linear-gradient(135deg, var(--text-primary) 0%, #2563eb 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: 0 1px 0 rgba(2, 6, 23, 0.05);
+    }
+
+    .header-buttons {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      margin-bottom: 26px;
+      flex-wrap: wrap;
+    }
+
+    .header-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      border-radius: 12px;
+      font-size: 0.95rem;
+      font-weight: 750;
+      text-decoration: none;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+      border: 1px solid var(--border-color);
+      background: var(--bg-card);
+      color: var(--text-secondary);
+      box-shadow: 0 8px 18px rgba(2, 6, 23, 0.06);
+    }
+
+    .header-btn:hover {
+      transform: translateY(-1px);
+      color: var(--text-primary);
+      border-color: rgba(37, 99, 235, 0.35);
+      box-shadow: 0 12px 26px rgba(2, 6, 23, 0.09);
+    }
+
+    .header-btn svg { width: 16px; height: 16px; fill: currentColor; }
+
+    .headline {
+      font-size: 1.2rem;
+      color: var(--text-secondary);
+      font-weight: 750;
+      margin-bottom: 14px;
+      letter-spacing: 0.2px;
+    }
+
+    .intro {
+      max-width: 760px;
+      margin: 0 auto;
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      line-height: 1.85;
+    }
+
+    /* At-a-glance summary section */
+    .at-a-glance {
+      max-width: 820px;
+      margin: 18px auto 0;
+      display: grid;
+      gap: 18px;
+      text-align: left;
+    }
+
+    .glance-title {
+      font-size: 0.95rem;
+      font-weight: 900;
+      color: var(--text-primary);
+      text-transform: uppercase;
+      letter-spacing: 0.9px;
+      margin-top: 4px;
+    }
+
+    .glance-block h4 {
+      font-size: 0.9rem;
+      font-weight: 900;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    .glance-block ul {
+      list-style: none;
+      padding-left: 0;
+      margin: 0;
+    }
+
+    .glance-block li {
+      font-size: 0.98rem;
+      color: var(--text-secondary);
+      margin-bottom: 7px;
+      position: relative;
+      padding-left: 16px;
+      line-height: 1.6;
+    }
+
+    .glance-block li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: #2563eb;
+      font-weight: 900;
+    }
+
+    .section-title {
+      font-size: 1.9rem;
+      font-weight: 900;
+      color: var(--text-primary);
+      margin-bottom: 34px;
+      letter-spacing: -0.6px;
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-title::after {
+      content: "";
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 70px;
+      height: 4px;
+      background: #2563eb;
+      border-radius: 999px;
+      opacity: 0.85;
+    }
+
+    .projects {
+      display: grid;
+      gap: 22px;
+      margin-bottom: 80px;
+    }
+
+    .project-card {
+      background: var(--bg-card);
+      padding: 28px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border-color);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 26px;
+      align-items: start;
+    }
+
+    .project-card::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 4px;
+      height: 100%;
+      background: var(--project-color);
+      opacity: 0.95;
+      transform: scaleY(0);
+      transform-origin: top;
+      transition: transform 0.22s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 18px 44px var(--shadow);
+      border-color: color-mix(in srgb, var(--project-color) 35%, var(--border-color));
+      background: color-mix(in srgb, var(--project-color) 4%, var(--bg-card));
+    }
+
+    .project-card:hover::before { transform: scaleY(1); }
+
+    /* ✅ No cropping + “designed” cover frame */
+    .project-image {
+      width: 100%;
+      height: 190px;
+      background: var(--bg-secondary);
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--border-color);
+      overflow: hidden;
+      padding: 8px;
+    }
+
+    .project-image img {
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      display: block;
+      border-radius: 10px;
+    }
+
+    .project-title {
+      font-size: 1.25rem;
+      font-weight: 900;
+      letter-spacing: -0.3px;
+      margin-bottom: 10px;
+      color: var(--text-primary);
+    }
+
+    .project-subtitle {
+      color: var(--text-tertiary);
+      font-weight: 800;
+      margin-bottom: 14px;
+      font-size: 0.95rem;
+    }
+
+    .project-description {
+      color: var(--text-secondary);
+      margin-bottom: 18px;
+      line-height: 1.75;
+      font-size: 1.02rem;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .tag {
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 850;
+      border: 1px solid color-mix(in srgb, var(--project-color) 25%, var(--border-color));
+      background: color-mix(in srgb, var(--project-color) 10%, var(--bg-secondary));
+      color: color-mix(in srgb, var(--project-color) 70%, var(--text-primary));
+    }
+
+    .actions { display: flex; gap: 10px; flex-wrap: wrap; }
+
+    .view-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--project-color);
+      color: white;
+      padding: 11px 18px;
+      text-decoration: none;
+      border-radius: 12px;
+      font-size: 0.98rem;
+      font-weight: 850;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+      border: none;
+      cursor: pointer;
+    }
+
+    .view-button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 12px 26px rgba(2, 6, 23, 0.18);
+      opacity: 0.95;
+    }
+
+    .view-button svg { width: 16px; height: 16px; fill: currentColor; }
+
+    .project-card.circular { --project-color: var(--circular); }
+    .project-card.lean { --project-color: var(--lean); }
+    .project-card.digital { --project-color: var(--digital); }
+    .project-card.erp { --project-color: var(--erp); }
+    .project-card.logprov { --project-color: var(--logprov); }
+    .project-card.ops { --project-color: var(--ops); }
+
+    .subprojects { display: grid; gap: 10px; margin-top: 10px; }
+
+    .subproject {
+      border: 1px solid color-mix(in srgb, var(--project-color) 18%, var(--border-color));
+      background: color-mix(in srgb, var(--project-color) 4%, var(--bg-card));
+      border-radius: 12px;
+      padding: 12px 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+      transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+    }
+
+    .subproject:hover {
+      transform: translateY(-1px);
+      border-color: color-mix(in srgb, var(--project-color) 35%, var(--border-color));
+      background: color-mix(in srgb, var(--project-color) 6%, var(--bg-card));
+    }
+
+    .subproject a {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      gap: 12px;
+      color: inherit;
+      text-decoration: none;
+      font-weight: 850;
+    }
+
+    footer {
+      text-align: center;
+      padding-top: 50px;
+      border-top: 1px solid var(--border-color);
+      color: var(--text-tertiary);
+      font-size: 0.95rem;
+      font-weight: 700;
+    }
+
+    @media (max-width: 820px) {
+      .project-card { grid-template-columns: 1fr; }
+      .project-image { height: 180px; }
+      header { margin-bottom: 55px; padding-bottom: 45px; }
+      .at-a-glance { text-align: left; }
+    }
+
+    .name::after {
+  content: "";
+  display: block;
+  width: 64px;
+  height: 4px;
+  margin: 14px auto 0;
+  background: #2563eb;
+  border-radius: 999px;
+  opacity: 0.85;
+    }
+
+  </style>
+</head>
+
+<body>
+  <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme" title="Toggle theme">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+      <path d="M12 18C8.686 18 6 15.314 6 12S8.686 6 12 6s6 2.686 6 6-2.686 6-6 6Zm0-2a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM11 1h2v3h-2V1Zm0 20h2v3h-2v-3ZM3.515 4.929l1.414-1.414L7.05 5.636 5.636 7.05 3.515 4.93Zm15.556 12.02 1.414-1.414 2.121 2.121-1.414 1.414-2.121-2.121ZM1 11h3v2H1v-2Zm20 0h3v2h-3v-2ZM4.929 20.485 3.515 19.07l2.121-2.121 1.414 1.414-2.121 2.121ZM20.485 4.929 19.07 3.515l-2.121 2.121 1.414 1.414 2.121-2.121Z"/>
+    </svg>
+  </button>
+
+  <div class="container">
+    <header>
+      <h1 class="name">Mustafa Abduljabbar</h1>
+
+      <div class="header-buttons">
+        <a href="https://www.linkedin.com/in/mustafaabduljabbar/" target="_blank" rel="noopener" class="header-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M6.94 5a2 2 0 1 1-4 0 2 2 0 0 1 4 0ZM7 8.48H3V21h4V8.48ZM13.32 8.48H9.34V21h3.94v-6.57c0-3.66 4.77-4 4.77 0V21H22v-7.93c0-6.17-7.06-5.94-8.68-2.91V8.48Z"/>
+          </svg>
+          LinkedIn
+        </a>
+      </div>
+
+      <p class="headline">Seeking the next big opportunity to establish my career in operations management! Here’s a selection of my work I’m proud to share.</p>
+
+      <!-- ✅ Profile · At a glance (under the intro) -->
+      <div class="at-a-glance">
+        <div class="glance-title">Profile · At a glance</div>
+
+        <div class="glance-block">
+          <h4>Education</h4>
+          <ul>
+            <li>MSc Logistics & Operations Management – Cardiff University (Distinction, 78%)</li>
+            <li>BSc Business Management – Cardiff University (2:1, 68%)</li>
+          </ul>
+        </div>
+
+        <div class="glance-block">
+          <h4>Relevant Experience</h4>
+          <ul>
+            <li>Live MSc Dissertation Project – DSV & ESG.AI</li>
+            <li>Data Analysis Internship – Office for National Statistics (ONS)</li>
+          </ul>
+        </div>
+
+        <div class="glance-block">
+          <h4>Other Experience</h4>
+          <ul>
+            <li>Food Delivery Driver – Domino’s</li>
+            <li>Customer Service Assistant – Tesco</li>
+          </ul>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <h2 class="section-title">Selected Work (Modules)</h2>
+
+      <div class="projects">
+
+        <div class="project-card circular">
+          <div class="project-image">
+            <img src="img/circular.jpg" alt="Circular Economy Operations cover">
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">Circular Economy Operations</h3>
+            <div class="project-subtitle">97% · Achived</div>
+            <p class="project-description">Proposed a retain-product-ownership (leasing/servitisation) model for Leonardo Helicopters to close the loop via repair, remanufacture, and recycling, while tackling return uncertainty using stochastic forecasting and blockchain-enabled traceability. </p>
+            <div class="tags">
+              <span class="tag">Circularity</span><span class="tag">Resource efficiency</span><span class="tag">Closed-loop forecasting & traceability</span>
+            </div>
+            <div class="actions">
+              <a class="view-button" href="pdfs/Circular_Economy_Operations_97.pdf" target="_blank" rel="noopener">
+                View Work
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.172 12 8.222 7.051 9.636 5.637 16 12l-6.364 6.364-1.414-1.414L13.172 12Z"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card lean">
+          <div class="project-image">
+            <img src="img/lean.jpg" alt="Lean & Operational Excellence cover">
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">Lean & Operational Excellence</h3>
+            <div class="project-subtitle">87% · Achived</div>
+            <p class="project-description">Critical lean transformation analysis of a UK medical device manufacturer, diagnosing flow, inventory, and cultural failures using VSM, SMED, Kanban, and Hoshin Kanri, and proposing a staged, data-driven recovery roadmap under NHS cost and quality pressure.</p>
+            <div class="tags">
+              <span class="tag">Lean</span><span class="tag">Continuous improvement</span><span class="tag">Process analysis</span><span class="tag">Cultural Alignment</span>
+            </div>
+            <div class="actions">
+              <a class="view-button" href="pdfs/Lean_and_Operational_Excellence_87.pdf" target="_blank" rel="noopener">
+                View Work
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.172 12 8.222 7.051 9.636 5.637 16 12l-6.364 6.364-1.414-1.414L13.172 12Z"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card digital">
+          <div class="project-image">
+            <img src="img/digital.jpg" alt="Digital Supply Chains & Logistics cover">
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">Digital Supply Chains & Logistics</h3>
+            <div class="project-subtitle">85% · Achived</div>
+            <p class="project-description">Analysed Aston Martin’s global supply chain to evaluate how blockchain traceability and cybersecurity integration could mitigate tariff exposure, supplier opacity, counterfeit risk, and regulatory pressure, while improving resilience across tier-1 and tier-2 suppliers following post-Brexit and geopolitical disruptions.</p>
+            <div class="tags">
+              <span class="tag">Digital transformation</span><span class="tag">Risk & resilience</span><span class="tag">Supplier traceability</span>
+            </div>
+            <div class="actions">
+              <a class="view-button" href="pdfs/Digital_Supply_Chains_and_Logistics_85.pdf" target="_blank" rel="noopener">
+                View Work
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.172 12 8.222 7.051 9.636 5.637 16 12l-6.364 6.364-1.414-1.414L13.172 12Z"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card erp">
+          <div class="project-image">
+            <img src="img/erp.jpg" alt="ERP Systems cover">
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">ERP Systems</h3>
+            <div class="project-subtitle">80% · Achived</div>
+            <p class="project-description">
+                <strong>Section One:</strong> Critical analysis of Bombardier’s ERP implementation success factors, evaluating governance, change management, and data integration challenges.
+                <br><br>
+                <strong>Section Two:</strong> In-person ERPsim simulation (team of five) covering procurement, production planning, and inventory control, testing real-time operational decision-making under competitive conditions.
+            </p>
+
+            <div class="tags">
+              <span class="tag">ERP</span><span class="tag">Change management</span><span class="tag">ERP simulation reflection</span>
+            </div>
+            <div class="actions">
+              <a class="view-button" href="pdfs/ERP_Systems_80.pdf" target="_blank" rel="noopener">
+                View Work
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.172 12 8.222 7.051 9.636 5.637 16 12l-6.364 6.364-1.414-1.414L13.172 12Z"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card logprov">
+          <div class="project-image">
+            <img src="img/logistics.jpg" alt="Logistics and Its Provision cover">
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">Logistics and Its Provision</h3>
+            <div class="project-subtitle">80% · Achived</div>
+            <p class="project-description">A policy-led analysis of Transport for London’s ULEZ and last-mile logistics regulations, critically evaluating their impact on van fleet decarbonisation and proposing a subsidised EV leasing scheme and Zero Emission Zone to accelerate adoption while addressing affordability and operational constraints.</p>
+            <div class="tags">
+              <span class="tag">UK logistics policy</span><span class="tag">Net Zero 2050</span><span class="tag">Last mile delivery</span>
+            </div>
+            <div class="actions">
+              <a class="view-button" href="pdfs/Logistics_and_Its_Provision_80.pdf" target="_blank" rel="noopener">
+                View Work
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.172 12 8.222 7.051 9.636 5.637 16 12l-6.364 6.364-1.414-1.414L13.172 12Z"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card ops">
+          <div class="project-image">
+            <img src="img/ops.jpg" alt="Operations Management cover">
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">Operations Management</h3>
+            <div class="project-subtitle">Two assessed outputs · 90% and 83%</div>
+            <p class="project-description">
+                <strong>Project One:</strong> Operational strategy assessment of Domino’s UK, analysing speed as an order winner and evaluating inventory control using the Order-Up-To (OUT) model, with explicit trade-offs between service level, safety stock, forecast accuracy, and food waste under high-volume, perishable demand.
+                <br><br>
+                <strong>Project Two:</strong> Process analysis of a UK sock manufacturer, mapping batch production flows and applying demand forecasting techniques to evaluate capacity planning, inventory implications, and analytical decision-making under variable demand.
+            </p>
+
+
+            <div class="tags">
+              <span class="tag">Operations</span><span class="tag">Performance</span><span class="tag">Analysis</span>
+            </div>
+
+            <div class="subprojects">
+              <div class="subproject">
+                <a href="pdfs/Operations_Management_Project_90.pdf" target="_blank" rel="noopener">
+                  <span>Project One</span>
+                  <span>90% →</span>
+                </a>
+              </div>
+              <div class="subproject">
+                <a href="pdfs/Operations_Management_Project_83.pdf" target="_blank" rel="noopener">
+                  <span>Project Two</span>
+                  <span>83% →</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+
+    <footer>
+      <p>&copy; <span id="year"></span> Mustafa Abduljabbar</p>
+    </footer>
+  </div>
+
+  <script>
+    const html = document.documentElement;
+    const toggle = document.getElementById("themeToggle");
+
+    function setTheme(mode) {
+      html.setAttribute("data-theme", mode);
+      localStorage.setItem("theme", mode);
+    }
+
+    function getPreferredTheme() {
+      const saved = localStorage.getItem("theme");
+      if (saved) return saved;
+      return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    }
+
+    function toggleTheme() {
+      const current = html.getAttribute("data-theme") || "light";
+      setTheme(current === "dark" ? "light" : "dark");
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      setTheme(getPreferredTheme());
+      document.getElementById("year").textContent = new Date().getFullYear();
+      toggle.addEventListener("click", toggleTheme);
+    });
+  </script>
+</body>
+</html>
