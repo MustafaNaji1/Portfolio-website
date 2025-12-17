@@ -10,7 +10,6 @@
     html { scroll-behavior: smooth; }
 
     :root {
-      /* Option 1: deeper, more “premium” blue (LIGHT MODE) */
       --accent: #1d4ed8;
       --accent-2: #0ea5e9;
       --accent-3: #22c55e;
@@ -39,28 +38,22 @@
       --ease-soft: cubic-bezier(.2,.8,.2,1);
     }
 
-    /* ✅ CINEMATIC DARK MODE (big changes) */
     [data-theme="dark"] {
-      /* Deep cinematic base */
       --bg-primary: #05070d;
       --bg-secondary: #070b14;
       --bg-card: #0a1122;
 
-      /* Softer, “premium” contrast */
       --text-primary: #eef2ff;
       --text-secondary: #cbd5e1;
       --text-tertiary: #94a3b8;
 
-      /* Polished borders/shadows */
       --border-color: rgba(226, 232, 240, 0.10);
       --shadow: rgba(0, 0, 0, 0.62);
 
-      /* Brighter, neon-cinema accents (still tasteful) */
       --accent: #60a5fa;
       --accent-2: #a78bfa;
       --accent-3: #34d399;
 
-      /* Calmer module colours on dark */
       --lean: #38bdf8;
       --circular: #fb7185;
       --digital: #4ade80;
@@ -80,7 +73,6 @@
       overflow-x: hidden;
     }
 
-    /* LIGHT: subtle premium background */
     body::before{
       content:"";
       position: fixed;
@@ -100,20 +92,15 @@
       z-index: 0;
     }
 
-    /* ✅ DARK: cinematic “nebula + film grain + faint scanlines” */
     [data-theme="dark"] body::before{
       opacity: 0.95;
       background:
-        /* deep vignette */
         radial-gradient(900px 600px at 50% 10%, rgba(0,0,0,0.25), rgba(0,0,0,0.75) 70%),
-        /* nebula lights */
         radial-gradient(1100px 700px at 15% -10%, color-mix(in srgb, var(--accent) 20%, transparent), transparent 60%),
         radial-gradient(1000px 680px at 88% 0%, color-mix(in srgb, var(--accent-2) 16%, transparent), transparent 62%),
         radial-gradient(1100px 720px at 55% 115%, color-mix(in srgb, var(--accent-3) 12%, transparent), transparent 64%),
-        /* faint grid removed; replaced by ultra subtle “depth” lines */
         linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
         linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px),
-        /* scanlines */
         repeating-linear-gradient(
           to bottom,
           rgba(255,255,255,0.018),
@@ -121,19 +108,11 @@
           transparent 1px,
           transparent 7px
         );
-      background-size:
-        auto,
-        auto,
-        auto,
-        auto,
-        140px 140px,
-        140px 140px,
-        auto;
+      background-size: auto, auto, auto, auto, 140px 140px, 140px 140px, auto;
       mask-image: radial-gradient(circle at 50% 20%, rgba(0,0,0,0.95), transparent 64%);
       animation: bgFloat 18s var(--ease-soft) infinite alternate;
     }
 
-    /* film grain overlay (very subtle, but makes dark mode “premium”) */
     body::after{
       content:"";
       position: fixed;
@@ -145,16 +124,13 @@
         url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
       mix-blend-mode: overlay;
     }
-    [data-theme="dark"] body::after{
-      opacity: 0.10;
-    }
+    [data-theme="dark"] body::after{ opacity: 0.10; }
 
     @keyframes bgFloat{
       0%   { transform: translate3d(0,0,0); }
       100% { transform: translate3d(0,-10px,0); }
     }
 
-    /* Cursor spotlight */
     .spotlight{
       position: fixed;
       inset: 0;
@@ -181,7 +157,6 @@
       z-index: 1;
     }
 
-    /* Theme toggle */
     .theme-toggle {
       position: fixed;
       top: 18px;
@@ -207,7 +182,6 @@
     }
     .theme-toggle svg { width: 18px; height: 18px; fill: var(--text-primary); opacity: 0.92; }
 
-    /* Sticky mini header */
     .mini-bar{
       position: fixed;
       top: 14px;
@@ -284,6 +258,9 @@
       font-size: 0.9rem;
       transition: transform 0.16s var(--ease-out), box-shadow 0.16s var(--ease-out), border-color 0.16s var(--ease-out);
       max-width: 340px;
+      position: relative;
+      overflow: hidden;
+      transform: translateZ(0);
     }
     .mini-link span{
       white-space: nowrap;
@@ -309,7 +286,23 @@
     }
     .mini-link svg{ width:16px; height:16px; fill: currentColor; opacity: 0.95; }
 
-    /* Header */
+    .mini-link.cv-mini{
+      background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 92%, white), var(--accent-2));
+      color: white;
+      border-color: rgba(255,255,255,0.22);
+      box-shadow: 0 18px 42px rgba(2,6,23,0.18);
+    }
+    [data-theme="dark"] .mini-link.cv-mini{
+      border-color: rgba(255,255,255,0.18);
+      box-shadow: 0 28px 110px rgba(0,0,0,0.65);
+    }
+    .mini-link.cv-mini:hover{
+      transform: translateY(-2px);
+      box-shadow: 0 24px 60px rgba(2,6,23,0.22);
+      border-color: rgba(255,255,255,0.30);
+      color: white;
+    }
+
     header {
       text-align: center;
       margin-bottom: 52px;
@@ -340,11 +333,17 @@
       opacity: 0.9;
     }
 
+    .cv-row{
+      display:flex;
+      justify-content:center;
+      margin: 18px 0 10px;
+    }
+
     .header-buttons {
       display: flex;
       gap: 10px;
       justify-content: center;
-      margin: 18px 0 18px;
+      margin: 10px 0 18px;
       flex-wrap: wrap;
     }
 
@@ -355,7 +354,7 @@
       padding: 10px 14px;
       border-radius: 12px;
       font-size: 0.95rem;
-      font-weight: 800;
+      font-weight: 850;
       text-decoration: none;
       border: 1px solid var(--border-color);
       background: color-mix(in srgb, var(--bg-card) 92%, transparent);
@@ -363,7 +362,7 @@
       box-shadow: 0 12px 26px rgba(2, 6, 23, 0.06);
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
-      transition: transform 0.16s var(--ease-out), box-shadow 0.16s var(--ease-out), border-color 0.16s var(--ease-out), background 0.16s var(--ease-out);
+      transition: transform 0.18s var(--ease-out), box-shadow 0.18s var(--ease-out), border-color 0.18s var(--ease-out), background 0.18s var(--ease-out);
       position: relative;
       overflow: hidden;
       transform: translateZ(0);
@@ -383,17 +382,18 @@
       max-width: 320px;
     }
 
+    /* ✅ "Different but similar" animation: subtle sweep */
     .header-btn::after{
       content:"";
       position:absolute;
-      inset:-40% -20%;
-      background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.20) 35%, transparent 70%);
-      transform: translateX(-120%) rotate(8deg);
-      transition: transform 0.55s var(--ease-out);
-      opacity: 0.55;
+      inset:-40% -30%;
+      background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.18) 40%, transparent 72%);
+      transform: translateX(-130%) rotate(10deg);
+      transition: transform 0.65s var(--ease-out), opacity 0.65s var(--ease-out);
+      opacity: 0.0;
       pointer-events:none;
     }
-    [data-theme="dark"] .header-btn::after{ opacity: 0.18; }
+    [data-theme="dark"] .header-btn::after{ background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.10) 40%, transparent 72%); }
 
     .header-btn:hover {
       transform: translateY(-2px);
@@ -409,8 +409,113 @@
     [data-theme="dark"] .header-btn:hover{
       box-shadow: 0 34px 120px rgba(0,0,0,0.62);
     }
-    .header-btn:hover::after{ transform: translateX(120%) rotate(8deg); }
+    .header-btn:hover::after{
+      transform: translateX(130%) rotate(10deg);
+      opacity: 1;
+    }
     .header-btn svg { width: 16px; height: 16px; fill: currentColor; opacity: 0.95; }
+
+    /* ✅ NEW: email/linkedin get a subtle animated "border glow" (NOT as bold as CV) */
+    .header-btn.contact-btn::before{
+      content:"";
+      position:absolute;
+      inset:-1px;
+      border-radius: 14px;
+      background: conic-gradient(
+        from 180deg,
+        transparent,
+        rgba(29,78,216,0.16),
+        transparent,
+        rgba(14,165,233,0.14),
+        transparent
+      );
+      opacity: 0;
+      filter: blur(8px);
+      transition: opacity 0.22s var(--ease-out);
+      pointer-events:none;
+    }
+    [data-theme="dark"] .header-btn.contact-btn::before{
+      background: conic-gradient(
+        from 180deg,
+        transparent,
+        rgba(96,165,250,0.18),
+        transparent,
+        rgba(167,139,250,0.14),
+        transparent
+      );
+    }
+    .header-btn.contact-btn:hover::before{ opacity: 1; }
+
+    /* ✅ CV button remains the hero */
+    .cv-btn{
+      padding: 12px 18px;
+      border-radius: 14px;
+      font-weight: 950;
+      letter-spacing: -0.2px;
+      color: white;
+      border: 1px solid rgba(255,255,255,0.26);
+      background: linear-gradient(135deg,
+        color-mix(in srgb, var(--accent) 92%, white),
+        var(--accent-2)
+      );
+      box-shadow:
+        0 18px 44px rgba(2,6,23,0.16),
+        0 0 0 0 rgba(29,78,216,0.0);
+      position: relative;
+      overflow: hidden;
+      transform: translateZ(0);
+    }
+    [data-theme="dark"] .cv-btn{
+      border-color: rgba(255,255,255,0.18);
+      box-shadow:
+        0 28px 120px rgba(0,0,0,0.62),
+        0 0 0 0 rgba(96,165,250,0.0);
+    }
+
+    .cv-btn::before{
+      content:"";
+      position:absolute;
+      inset:-60% -30%;
+      background: radial-gradient(closest-side, rgba(255,255,255,0.42), transparent 60%);
+      transform: translateX(-60%) rotate(10deg);
+      opacity: 0.35;
+      pointer-events:none;
+      transition: transform 0.55s var(--ease-out), opacity 0.55s var(--ease-out);
+    }
+
+    .cv-btn::after{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.35);
+      opacity: 0.0;
+      transform: scale(0.98);
+      animation: cvPulse 2.4s var(--ease-soft) infinite;
+      pointer-events:none;
+    }
+    [data-theme="dark"] .cv-btn::after{ border-color: rgba(255,255,255,0.22); }
+
+    @keyframes cvPulse{
+      0%   { opacity: 0.0; transform: scale(0.98); }
+      40%  { opacity: 0.45; transform: scale(1.03); }
+      70%  { opacity: 0.0; transform: scale(1.06); }
+      100% { opacity: 0.0; transform: scale(1.06); }
+    }
+
+    .cv-btn:hover{
+      transform: translateY(-2px);
+      box-shadow: 0 24px 64px rgba(2,6,23,0.20);
+      opacity: 0.98;
+    }
+    [data-theme="dark"] .cv-btn:hover{
+      box-shadow: 0 42px 160px rgba(0,0,0,0.72);
+    }
+    .cv-btn:hover::before{
+      transform: translateX(60%) rotate(10deg);
+      opacity: 0.22;
+    }
+    .cv-btn:active{ transform: translateY(-1px); }
 
     .headline {
       font-size: 1.02rem;
@@ -423,7 +528,6 @@
       line-height: 1.78;
     }
 
-    /* At-a-glance */
     .at-a-glance {
       max-width: 820px;
       margin: 18px auto 0;
@@ -502,7 +606,6 @@
       transform: translateY(-50%);
     }
 
-    /* Section title */
     .section-title {
       font-size: 1.6rem;
       font-weight: 900;
@@ -524,7 +627,6 @@
       opacity: 0.9;
     }
 
-    /* Projects */
     .projects { display: grid; gap: 16px; margin-bottom: 70px; }
 
     .project-card {
@@ -744,9 +846,7 @@
       overflow: hidden;
       transform: translateZ(0);
     }
-    [data-theme="dark"] .view-button{
-      box-shadow: 0 26px 100px rgba(0,0,0,0.55);
-    }
+    [data-theme="dark"] .view-button{ box-shadow: 0 26px 100px rgba(0,0,0,0.55); }
 
     .view-button::after{
       content:"";
@@ -765,9 +865,7 @@
       opacity: 0.96;
       box-shadow: 0 18px 38px rgba(2, 6, 23, 0.22);
     }
-    [data-theme="dark"] .view-button:hover{
-      box-shadow: 0 38px 140px rgba(0,0,0,0.68);
-    }
+    [data-theme="dark"] .view-button:hover{ box-shadow: 0 38px 140px rgba(0,0,0,0.68); }
     .view-button:hover::after{ transform: translateX(120%) rotate(8deg); }
     .view-button svg { width: 16px; height: 16px; fill: currentColor; opacity: 0.95; }
 
@@ -824,7 +922,6 @@
       font-weight: 700;
     }
 
-    /* Animations */
     .enter { opacity: 0; transform: translateY(14px); }
     .enter.is-in { opacity: 1; transform: translateY(0); transition: opacity .75s var(--ease-out), transform .75s var(--ease-out); }
 
@@ -845,6 +942,7 @@
       body::before{ display:none; }
       body::after{ display:none; }
       .spotlight{ display:none; }
+      .cv-btn::after{ animation: none !important; }
     }
 
     @media (max-width: 820px) {
@@ -863,19 +961,26 @@
 <body>
   <div class="spotlight" id="spotlight"></div>
 
-  <!-- Sticky mini header -->
   <div class="mini-bar" id="miniBar" aria-hidden="true">
     <div class="mini-left">
       <div class="mini-name">Mustafa Abduljabbar</div>
       <div class="mini-sub">Mustafanaji1@outlook.com</div>
     </div>
     <div class="mini-actions">
+      <a class="mini-link cv-mini" href="pdfs/Mustafa_Abduljabbar_CV.pdf" target="_blank" rel="noopener" download>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path d="M12 16 7 11h3V4h4v7h3l-5 5ZM5 20h14v-2H5v2Z"/>
+        </svg>
+        <span>Download CV</span>
+      </a>
+
       <a class="mini-link" href="mailto:Mustafanaji1@outlook.com">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
           <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2Zm0 4-8 5L4 8V6l8 5 8-5v2Z"/>
         </svg>
         <span>Mustafanaji1@outlook.com</span>
       </a>
+
       <a class="mini-link" href="https://www.linkedin.com/in/mustafaabduljabbar/" target="_blank" rel="noopener">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
           <path d="M6.94 5a2 2 0 1 1-4 0 2 2 0 0 1 4 0ZM7 8.48H3V21h4V8.48ZM13.32 8.48H9.34V21h3.94v-6.57c0-3.66 4.77-4 4.77 0V21H22v-7.93c0-6.17-7.06-5.94-8.68-2.91V8.48Z"/>
@@ -895,15 +1000,24 @@
     <header class="enter">
       <h1 class="name">Mustafa Abduljabbar</h1>
 
+      <div class="cv-row">
+        <a href="pdfs/Mustafa_Abduljabbar_CV.pdf" class="header-btn cv-btn" target="_blank" rel="noopener" download>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M12 16 7 11h3V4h4v7h3l-5 5ZM5 20h14v-2H5v2Z"/>
+          </svg>
+          <span>Download CV</span>
+        </a>
+      </div>
+
       <div class="header-buttons">
-        <a href="mailto:Mustafanaji1@outlook.com" class="header-btn">
+        <a href="mailto:Mustafanaji1@outlook.com" class="header-btn contact-btn">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
             <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2Zm0 4-8 5L4 8V6l8 5 8-5v2Z"/>
           </svg>
           <span>Mustafanaji1@outlook.com</span>
         </a>
 
-        <a href="https://www.linkedin.com/in/mustafaabduljabbar/" target="_blank" rel="noopener" class="header-btn">
+        <a href="https://www.linkedin.com/in/mustafaabduljabbar/" target="_blank" rel="noopener" class="header-btn contact-btn">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
             <path d="M6.94 5a2 2 0 1 1-4 0 2 2 0 0 1 4 0ZM7 8.48H3V21h4V8.48ZM13.32 8.48H9.34V21h3.94v-6.57c0-3.66 4.77-4 4.77 0V21H22v-7.93c0-6.17-7.06-5.94-8.68-2.91V8.48Z"/>
           </svg>
@@ -938,6 +1052,7 @@
       <h2 class="section-title enter">Selected Work</h2>
 
       <div class="projects">
+        <!-- (Everything below stays the same as your current version) -->
 
         <div class="project-card circular reveal">
           <div class="project-image">
@@ -1127,7 +1242,7 @@
       const io = new IntersectionObserver((entries) => {
         entries.forEach((e) => {
           if (e.isIntersecting) e.target.classList.add("is-visible");
-          else e.target.classList.remove("is-visible"); // reversible
+          else e.target.classList.remove("is-visible");
         });
       }, { threshold: 0.14 });
 
