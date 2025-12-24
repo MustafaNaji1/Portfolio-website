@@ -232,6 +232,25 @@
 
     .mini-left{
       display:flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+    .mini-avatar{
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1px solid var(--border-color);
+      background: var(--bg-card);
+      flex: 0 0 auto;
+    }
+    [data-theme="dark"] .mini-avatar{
+      border-color: rgba(226,232,240,0.16);
+    }
+
+    .mini-identity{
+      display:flex;
       flex-direction: column;
       line-height: 1.2;
       min-width: 0;
@@ -325,29 +344,71 @@
       border-bottom: 1px solid var(--border-color);
     }
 
-    .name {
-      font-size: clamp(2.15rem, 4.4vw, 3.35rem);
-      font-weight: 900;
-      letter-spacing: -1.1px;
+    /* ===================== PROFILE PHOTO (REFINED & BALANCED) ===================== */
+    .hero-identity{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
       margin-bottom: 10px;
-      display: inline-block;
-      background: linear-gradient(135deg, var(--text-primary) 0%, color-mix(in srgb, var(--accent) 55%, var(--text-primary)) 55%, var(--text-primary) 100%);
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
+      text-align: center;
     }
 
-    .name::after {
-      content: "";
+    .profile-photo{
+      width: 180px;              /* balanced desktop size */
+      height: 180px;
+      border-radius: 50%;
+      padding: 3px;              /* subtle outer ring */
+      background:
+        linear-gradient(
+          135deg,
+          color-mix(in srgb, var(--accent) 45%, transparent),
+          color-mix(in srgb, var(--accent-2) 35%, transparent)
+        );
+      box-shadow: 0 14px 32px rgba(2, 6, 23, 0.12);
+      position: relative;
+    }
+
+    [data-theme="dark"] .profile-photo{
+      box-shadow: 0 28px 90px rgba(0,0,0,0.60);
+    }
+
+    /* Inner frame */
+    .profile-photo img{
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
       display: block;
-      width: 78px;
-      height: 3px;
-      margin: 14px auto 0;
-      background: color-mix(in srgb, var(--accent) 85%, var(--accent-2));
-      border-radius: 999px;
-      opacity: 0.9;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
     }
 
+    /* Subtle inner highlight */
+    .profile-photo::after{
+      content: "";
+      position: absolute;
+      inset: 3px;
+      border-radius: 50%;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.28);
+      pointer-events: none;
+    }
+
+    [data-theme="dark"] .profile-photo::after{
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.12);
+    }
+
+    /* Mobile */
+    @media (max-width: 480px) {
+      .profile-photo{
+        width: 96px;
+        height: 96px;
+        padding: 2px;
+      }
+    }
+    /* ============================================================================ */
+         
     .cv-row{
       display:flex;
       justify-content:center;
@@ -429,7 +490,7 @@
     }
     .header-btn svg { width: 16px; height: 16px; fill: currentColor; opacity: 0.95; }
 
-    /* Contact buttons: slightly different vibe from CV (subtle glow ring) */
+    /* Contact buttons: subtle glow ring */
     .header-btn.contact-btn::before{
       content:"";
       position:absolute;
@@ -969,6 +1030,11 @@
       .project-top { flex-direction: column; align-items: flex-start; gap: 10px; }
       .project-subtitle { width: fit-content; }
       .project-title { max-width: 100%; }
+
+      .profile-photo{
+        width: 104px;
+        height: 104px;
+      }
     }
   </style>
 </head>
@@ -978,9 +1044,14 @@
 
   <div class="mini-bar" id="miniBar" aria-hidden="true">
     <div class="mini-left">
-      <div class="mini-name">Mustafa Abduljabbar</div>
-      <div class="mini-sub">Mustafanaji1@outlook.com</div>
+      <!-- Upload your photo as: /img/profile.jpg -->
+      <img class="mini-avatar" src="img/profile.jpg" alt="Mustafa Abduljabbar">
+      <div class="mini-identity">
+        <div class="mini-name">Mustafa Abduljabbar</div>
+        <div class="mini-sub">Mustafanaji1@outlook.com</div>
+      </div>
     </div>
+
     <div class="mini-actions">
       <a class="mini-link cv-mini" href="pdfs/Mustafa_Abduljabbar_CV.pdf" target="_blank" rel="noopener">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -1013,7 +1084,13 @@
 
   <div class="container">
     <header class="enter">
-      <h1 class="name">Mustafa Abduljabbar</h1>
+      <div class="hero-identity">
+        <!-- Upload your photo as: /img/profile.jpg -->
+        <div class="profile-photo">
+          <img src="img/profile.jpg" alt="Headshot of Mustafa Abduljabbar">
+        </div>
+        <h1 class="name">Mustafa Abduljabbar</h1>
+      </div>
 
       <div class="cv-row">
         <a href="pdfs/Mustafa_Abduljabbar_CV.pdf" class="header-btn cv-btn" target="_blank" rel="noopener">
@@ -1040,7 +1117,7 @@
         </a>
       </div>
 
-      <p class="headline">Seeking the next big opportunity to establish my career in operations management! Here’s a selection of my work I’m proud to share.</p>
+      <p class="headline">Seeking an entry-level role in high-tech manufacturing operations planning. Below is a curated selection of assessed work.</p>
 
       <div class="at-a-glance">
         <div class="glance-title">Profile · At a glance</div>
@@ -1048,8 +1125,8 @@
         <div class="glance-block reveal">
           <h4>Education</h4>
           <ul>
-            <li>MSc Logistics & Operations Management – Cardiff University (Distinction, 78%)</li>
-            <li>BSc Business Management – Cardiff University (2:1, 68%)</li>
+            <li><strong>MSc Logistics & Operations Management</strong> – Cardiff University <strong>(Distinction, 78%)</strong></li>
+            <li><strong>BSc Business Management</strong> – Cardiff University <strong>(2:1, 68%)</strong></li>
           </ul>
         </div>
 
